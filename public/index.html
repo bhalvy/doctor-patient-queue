@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minimal working example</title>
+</head>
+<body>
+<ul id="events"></ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="module">
+  import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
+  // console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+  const $events = document.getElementById('events');
+
+  const newItem = (content) => {
+    const item = document.createElement('li');
+    item.innerText = content;
+    return item;
+  };
+
+  const socket = io();
+
+  socket.on('connect', () => {
+    socket.emit('init', { patientId: uuidv4() });
+  });
+
+  socket.on('call-connected', (item) => {
+    console.log('FUUUUCK YEAH!', item)
+  });
+
+  socket.on('call', (item) => {
+    console.log('CALL TIME:', new Date());
+  });
+
+  let counter = 0;
+  setInterval(() => {
+    ++counter;
+    socket.emit('waiting-list-status', { counter }); // the object will be serialized for you
+  }, 1000);
+</script>
+<script>
+
+</script>
+</body>
+</html>
