@@ -1,7 +1,34 @@
-# Remedy Video Signalling Application
+# MVP Video Signalling Application
 
 This application pairs up waiting patients with available doctors using WebSockets 
 for signaling a WebRTC video connection. 
+
+## Installation Instructions
+Install Dependencies
+````
+npm install
+````
+Start Redis and Mongo DB from docker images
+````
+npm run start-datastore
+````
+Start Application
+````
+npm run start
+````
+Once the server is running the doctors currently 'on shift' will be loaded and ready to see patients.
+
+### There are 2 ways to add patients
+
+```http://localhost:3000```
+
+This will create one socket for that browser window. There is no styling on the page. Basic Connection Info is shared in console.
+
+````http://localhost:3000/patient/{number}````
+
+This will create mock socket connections in the amount of {number}
+
+Example: http://localhost:3000/patient/100
 
 ## Featured In This MVP
 

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/seeds.js && nodemon ./app.js",
+    "start": "node ./bin/seeds.js && node ./app.js",
     "start-datastore": "docker-compose -f ./docker-compose.yml up"
   },
   "dependencies": {
